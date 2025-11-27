@@ -87,6 +87,16 @@ controller.retrieveOne = async function(req, res) {
   }
 }
 
+/*
+Vulnerabilidade: API3:2023 - Falha de autenticação a nível de propriedade
+Esta vulnerabilidade deveria ter sido evitada no código fazendo a filtragem
+de propriedades sensíveis antes de atualizar o usuário. Atualmente, req.body
+é passado diretamente para o banco de dados, permitindo que um administrador
+possa alterar propriedades sensíveis como is_admin, id, ou outros campos que
+não deveriam ser modificáveis diretamente via API sem validação adicional.
+Deveria ser implementada uma whitelist de campos permitidos ou uma blacklist
+de campos bloqueados para evitar atribuição em massa de propriedades.
+*/
 controller.update = async function(req, res) {
   try {
 

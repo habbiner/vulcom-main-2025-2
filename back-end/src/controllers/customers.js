@@ -55,6 +55,15 @@ controller.retrieveAll = async function(req, res) {
   }
 }
 
+/*
+Vulnerabilidade: API1:2023 - Falha de autenticação a nível de objeto
+Esta vulnerabilidade deveria ter sido evitada no código fazendo
+verificação de autorização para garantir que o usuário autenticado tenha
+permissão para acessar o recurso específico do cliente (customer) com
+o ID fornecido na requisição. Atualmente, qualquer usuário autenticado
+pode acessar qualquer cliente apenas conhecendo o ID, sem verificar se
+existe relação de propriedade ou autorização adequada.
+*/
 controller.retrieveOne = async function(req, res) {
   try {
     const result = await prisma.customer.findUnique({
@@ -77,6 +86,15 @@ controller.retrieveOne = async function(req, res) {
   }
 }
 
+/*
+Vulnerabilidade: API1:2023 - Falha de autenticação a nível de objeto
+Esta vulnerabilidade deveria ter sido evitada no código fazendo
+verificação de autorização para garantir que o usuário autenticado tenha
+permissão para modificar o recurso específico do cliente (customer) com
+o ID fornecido na requisição. Atualmente, qualquer usuário autenticado
+pode modificar qualquer cliente apenas conhecendo o ID, sem verificar se
+existe relação de propriedade ou autorização adequada.
+*/
 controller.update = async function(req, res) {
   try {
 

@@ -81,6 +81,16 @@ controller.retrieveOne = async function(req, res) {
   }
 }
 
+/*
+Vulnerabilidade: API1:2023 - Falha de autenticação a nível de objeto
+Esta vulnerabilidade deveria ter sido evitada no código fazendo
+verificação de autorização para garantir que o usuário autenticado tenha
+permissão para modificar o recurso específico do carro (car) com o ID
+fornecido na requisição. Atualmente, qualquer usuário autenticado pode
+modificar qualquer carro apenas conhecendo o ID, sem verificar se existe
+relação de propriedade (como verificar se o carro pertence a um cliente
+vinculado ao usuário) ou autorização adequada.
+*/
 controller.update = async function(req, res) {
   try {
 
